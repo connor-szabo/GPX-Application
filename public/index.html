@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GPX Data Viewer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CHANGE ME">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="Connor Szabo">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Custom CSS End -->
+</head>
+<body>
+	<h1 align="left">GPX Data Viewer</h1>
+	<br>
+	<h3 align="center">File Log Panel</h3>	
+	
+	<!--The File Log Panel-->
+	<br>
+	<div align="center" class="scroller1">
+	<h3 id="doesntExist">No Files</h3>
+
+		<table id="FilePanel">
+			<tr>
+				<th>File name (click to download)</th>
+				<th>Version</th>
+				<th>Creator</th>
+				<th>Number of Waypoints</th>
+				<th>Number of Routes</th>
+				<th>Number of Tracks</th>
+			</tr>
+
+		</table>
+	</div>
+	
+
+	<!--The div to upload a new gpx doc-->
+	<br>
+
+		<div align="center">
+		<input name="uploadFile" type="file" align="center" id="upload">
+			<input type="submit" id="dwnldBtn" value="Upload File">
+		</div>
+	
+	<br><br>
+	
+	
+	<!--GPX View Panel-->
+	<h3 align="center">GPX View Panel</h3>
+	<div align="center">
+		<select id="docSelect" class="select" align="center">
+		</select>
+		<input type="submit" id="gpxView" value="View Components">
+	</div>
+	<br>
+	<div align = "center" class="scroller2">
+		<table id="GPX Panel" width="800px">
+			<tr>
+				<th>Component</th>
+				<th width="100px">Name</th>
+				<th>Number of Points</th>
+				<th>Length</th>
+				<th>Loop</th>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<div>
+		<select id="componentSelect" class="select">
+		</select>
+		<input type="text" id="rename">
+		<input type="submit" id="renameBtn" value="Rename">
+		<input type="submit" id="att" value="Attributes">
+	</div>
+	
+	<br>
+	<div>
+		<h4>Add a Route (To Selected File)</h4>
+		Name: <input type="text" id="rteNme">
+		Latitude<input type="number" max="180" min="-180" step="0.00001" id="rteLa">
+		<br>
+		Longitude<input type="number" max="180" min="-180" step="0.00001" id="rteLo">
+		<input type="submit" id="addRte" value="Add Route">
+
+		
+		<br><br>
+		
+		
+		<h4>Add a Waypoint (To Selected Route)</h4>
+		Latitude<input type="number" id="wptLa" max="180" min="-180" step="0.00001">
+		<br>
+		Longitude<input type="number" id="wptLo" max="180" min="-180" step="0.00001">
+		<br>
+		Name: <input type="text">
+		<input type="submit" id="addWpt" value="Add Waypoint">
+	</div>
+	
+	<br><br>
+	
+	<h3 align="center">Possible Paths</h3>
+	<div align="center" class="scroller2">
+		<table width="800px" id="pathTable">
+			<tr>
+				<th>Component</th>
+				<th width="100px">Name</th>
+				<th>Number of Points</th>
+				<th>Length</th>
+				<th>Loop</th>
+			</tr>
+		</table>
+	</div>
+	<div align="center">
+	Starting Latitude<input type="number" step="0.00001" id="strtLa">
+		Starting Longitude<input type="number" step="0.00001" id="strtLo">
+	</div>
+	<div align="center">
+		Ending Latitude<input type="number" step="0.00001" id="endLa">
+		Ending Longitude<input type="number" step="0.00001" id="endLo">
+	</div>
+	<div align="center">
+		Accuracy<input type="number" step="0.00001" max="180" min="-180" id="accuracy">
+		<input type="submit" id="findPaths" value="Find Paths">
+	 </div>
+	
+	 <br><br>
+	 
+	 <h4>Create GPX</h4>
+	 <div>
+		File Name:<input type="text" id="gpxFileName">
+		Creator:<input type="text" id="gpxFileCreator">
+		<input type="submit" value="Create" id="createGPXBtn">
+	 </div>
+	 <br><br>
+	 
+	 <h3 align='center'>Database</h3>
+	 <div align= "center">
+		Username:<input type="text" align="left" id="us">
+		<br>
+		Password:<input type="text" id="ps">
+		<br>
+		Database:<input type="text" id="db">
+		<br><br>
+		<input type="submit" value="Log in" id="dbLogin">
+		<input type="submit" value="Cancel" id="dbLogout">
+	 </div>
+	 <br><br>
+	 <div align="center">
+		<input type="submit", value="Store All Files" id="dbFile">
+		<input type="submit", value="Clear All Data" id="dbClear">
+		 <input type="submit", value="Display DB Status" id="dbDisplay">
+		 <input type="submit", value="Execute Query" id="dbQ">
+		 <br>
+		 <select id="queryList" class="select">
+			 <option value="1">Display All Routes</option>
+			 <option value="2">Display Routes from File</option>
+			 <option value="3">Display Points from Route</option>
+			 <option value="4">Display All Points from File</option>
+		</select>
+	 </div>
+	 
+	 <br><br><br>
+	 
+    
+    <!-- Leave me at the bottom of body -->
+    <script src="/index.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
